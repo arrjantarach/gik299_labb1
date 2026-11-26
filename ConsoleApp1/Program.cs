@@ -30,18 +30,20 @@
             switch (menu)
             {
                 case 1:
+                    //While loop för att få rätt format på celsisu
                     Console.WriteLine("Skriv temperaturen i Celsius:");
                     while (!double.TryParse(Console.ReadLine(), out temprature))
                     {
                         Console.WriteLine("Ogiltig temperatur. Försök igen:");
                     }
-
+                    
+                    //While loop för att få rätt format på windspeed
                     Console.WriteLine("Skriv vindhastigheten:");
                     while (!double.TryParse(Console.ReadLine(), out windSpeed))
                     {
                         Console.WriteLine("Ogiltig vindhastighet. Försök igen:");
                     }
-                    
+                    //While loop för att få rätt format på betekning
                     while (true)
                     {
                         Console.WriteLine("Skriv km/h eller m/s");
@@ -55,12 +57,16 @@
                         {
                             break;
                         }
+                        
+                        Console.WriteLine("Ogiltig enhet. Skriv km/h eller m/s.");
                     }
-
+                    
+                    //Beräkning av wind chill temprature
                     windChillTemprature = 13.12 + 0.6215 * temprature - 11.37 * Math.Pow(windSpeed, 0.16) + 0.3965 * temprature * Math.Pow(windSpeed, 0.16);
 
                     Console.WriteLine($"Det är {temprature} grader ute men det känns som {windChillTemprature.ToString("F1")} grader.");
-
+                    
+                    //Skriver ut risken för frostskada till användaren.
                     if (windChillTemprature < -60)
                     {
                         Console.WriteLine("Stor risk för frostskada");
@@ -84,14 +90,20 @@
                     
                     break;
                 case 2:
+                    //Stänger av programmet genom att stänga av boolen till ytersta while loopen
                     run = false;
                     
                     Console.WriteLine("Programmet Avslutas");
                     break;
                 default:
+                    // Här är en default som inte någosin borde kunna hända men man vet aldrig hur man utvecklar vidare programmet så den får vara här.
                     Console.WriteLine("Du skrev fel meny val, skriv ett giltigtval");
                     break;
             }
         }
     }
+    /*  Jag satte en breakpoint på wind chill temprature variale på rad 62 så jag
+     * kunde se variablerna för matematiken och sen om man stegar vidare så ser
+     * man även vad windchilltemprature är.
+     */
 }
